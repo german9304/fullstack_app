@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.10.6",
+    "jest": "^24.9.0",
+    "pretty": "^2.0.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/react": "^9.4.0"
+  }
+}
