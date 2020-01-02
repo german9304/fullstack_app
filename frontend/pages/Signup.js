@@ -7,8 +7,10 @@ import gql from 'graphql-tag';
 import FormStyles from './components/styles/FormStyles';
 import WithLayout from './components/Layout';
 import StyledButton from './components/styles/ButtonStyles';
+import Me from './components/Author';
 
 import { useMutation } from '@apollo/react-hooks';
+import { useRouter } from 'next/router';
 import { useInputValue } from '../lib/CustomHook';
 
 export const SIGNUP_MUTATION = gql`
@@ -27,6 +29,9 @@ function Signup() {
   const [signupMutation, { loading, error, data }] = useMutation(
     SIGNUP_MUTATION
   );
+
+  const router = useRouter();
+
   const FORM_FIELDS = [
     { field: 'name', handler: useInputValue('') },
     { field: 'email', handler: useInputValue('') },
@@ -40,11 +45,17 @@ function Signup() {
   }
 
   if (error) {
-    return <p>{error.message}</p>;
+    console.log(JSON.stringify(error, null, '  '));
+    error.graphQLErrors.map(({ message }, i) => {
+      console.log(`graphql errors here c${message}`);
+    });
+    return <p>there is an error</p>;
   }
 
   if (data) {
-    console.log(JSON.stringify(data, null, '   '));
+    if (router) {
+      router.push('/books');
+    }
   }
 
   const setUpField = field => field.replace(/ /gi, '_');
@@ -53,7 +64,13 @@ function Signup() {
     e.preventDefault();
     // Goes through the FORM_FIELDS array and reduces it to an object
     const author = FORM_FIELDS.reduce((acc, { field, handler }) => {
-      return { ...acc, [setUpField(field)]: handler.value };
+      const setUpValue = () => {
+        if (field === 'age') {
+          return Number(handler.value);
+        }
+        return handler.value;
+      };
+      return { ...acc, [setUpField(field)]: setUpValue() };
     }, {});
 
     signupMutation({
@@ -74,9 +91,10 @@ function Signup() {
           let spaceRemoved = setUpField(field);
           return (
             <div key={`${field}${i}`} className='form form-formgroup'>
-              <label htmlFor={spaceRemoved}>{spaceRemoved}</label>
+              <label htmlFor={spaceRemoved}>{field}</label>
               <input
-                type='text'
+                autoComplete='none'
+                type={field === 'password' ? field : 'text'}
                 name={spaceRemoved}
                 value={handler.value}
                 onChange={handler.handleValue}

@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import Ul from './styles/ListStyles';
-
+import useMe from './Author';
 import Link from 'next/link';
+import gql from 'graphql-tag';
+
+import { useMutation } from '@apollo/react-hooks';
 
 const StyledNav = styled.nav`
   * {
@@ -17,6 +20,7 @@ const StyledNav = styled.nav`
     text-decoration: none;
     color: #111111;
     padding: 0.5em;
+    cursor: pointer;
   }
 
   .user-auth a:hover {
@@ -57,7 +61,23 @@ const StyledNav = styled.nav`
   } */
 `;
 
+export const SIGN_OUT_MUTATION = gql`
+  mutation SIGN_OUT_MUTATION {
+    signout {
+      message
+    }
+  }
+`;
+
 function Nav() {
+  // Fetch current signed in user
+  const currentUser = useMe();
+  const [signOutMutation, { loading, data: signoutData, error }] = useMutation(
+    SIGN_OUT_MUTATION
+  );
+
+  // If data exists display user
+  const data = currentUser.data ? currentUser.data.me : null;
   return (
     <StyledNav>
       <div className='app-name'>
@@ -69,19 +89,24 @@ function Nav() {
       </div>
       <div className='user-auth'>
         <Ul>
-          <li id='signin'>
-            <Link href='/signin'>
-              <a>Sign in</a>
-            </Link>
-          </li>
-          <li id='signup'>
-            <Link href='/signup'>
-              <a>Join Now</a>
-            </Link>
-          </li>
-          {/* <li id='signout'>
-            <a>Sign out</a>
-          </li> */}
+          {data ? (
+            <li id='signout'>
+              <a>Sign out</a>
+            </li>
+          ) : (
+            <>
+              <li id='signin'>
+                <Link href='/signin'>
+                  <a>Sign in</a>
+                </Link>
+              </li>
+              <li id='signup'>
+                <Link href='/signup'>
+                  <a>Join Now</a>
+                </Link>
+              </li>
+            </>
+          )}
         </Ul>
       </div>
     </StyledNav>

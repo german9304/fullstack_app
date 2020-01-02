@@ -33,6 +33,10 @@ const Query = {
     return book;
   },
   me(parent, args, ctx, info) {
+    // if author id does not exists return null
+    if (!ctx.req.request.authorID) {
+      return null;
+    }
     const { authorID } = ctx.req.request;
     const SIGNED_USER_QUERY = `
       SELECT author_id, name, email, last_name, password, age, created FROM author

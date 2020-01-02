@@ -1,1 +1,0 @@
-{"ast":null,"code":"import Books from './components/Books';\nexport default Books;","map":{"version":3,"sources":["/frontend/pages/books.js"],"names":["Books"],"mappings":"AAAA,OAAOA,KAAP,MAAkB,oBAAlB;AAEA,eAAeA,KAAf","sourcesContent":["import Books from './components/Books';\n\nexport default Books;\n"]},"metadata":{},"sourceType":"module"}

@@ -11,6 +11,10 @@ import Book from './Book';
 import { useQuery } from '@apollo/react-hooks';
 
 const BooksStyles = styled.article`
+  a {
+    text-decoration: none;
+    color: #111111;
+  }
   h1 {
     text-align: center;
     font-family: var(--global-font);
@@ -42,7 +46,7 @@ function Books() {
 
   return (
     <BooksStyles className='books'>
-      <h1 className='article-header'>Books</h1>
+      {/* <h1 className='article-header'>Books</h1> */}
       {data.books.map(book => {
         return <Book key={book.book_id} data={book} />;
       })}

@@ -12,7 +12,7 @@ describe('Signup component', () => {
       email: 'testuser@mail.com',
       last_name: 'testuserlastname',
       password: 'user123456',
-      age: '45'
+      age: 45
     };
 
     const mocks = [
@@ -60,7 +60,13 @@ describe('Signup component', () => {
     fireEvent.submit(button);
     await act(async () => {});
     formInputs.forEach(input => {
-      expect(input.value).toBe(authorInput[input.name]);
+      const setUpValue = () => {
+        if (input.name === 'age') {
+          return Number(input.value);
+        }
+        return input.value;
+      };
+      expect(setUpValue()).toBe(authorInput[input.name]);
     });
   });
 });

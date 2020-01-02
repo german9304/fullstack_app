@@ -16,7 +16,7 @@ const Mutation = {
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING author_id, name, last_name, email, password, age
     `;
-    const rowParams = [uniqid, name, last_name, email, password, age];
+    const rowParams = [uniqid, name, last_name, email, password, Number(age)];
     const newAuthor = await query.dbOneQuery(ctx.db.DB, INSERT_ROW, rowParams);
     // Sets new cookie to store user session
     ctx.req.response.cookie('signedAuthor', newAuthor.author_id, {

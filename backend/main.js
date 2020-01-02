@@ -8,7 +8,8 @@ function main() {
   server.express.use(cookieParser());
   // authentication middleware
   server.express.use((req, res, next) => {
-    if (!'signedAuthor' in req.cookies) {
+    console.log(req.cookies);
+    if (!('signedAuthor' in req.cookies)) {
       next();
       return;
     }

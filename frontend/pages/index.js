@@ -2,6 +2,8 @@
 import styled from 'styled-components';
 import WithLayout from './components/Layout';
 import Ul from './components/styles/ListStyles';
+import Books from './components/Books';
+import useMe from './components/Author';
 
 import { useState, createContext } from 'react';
 
@@ -23,6 +25,10 @@ const StyledApp = styled.div`
     margin-bottom: 1em;
   }
 
+  .app-title {
+    font-size: 1.3em;
+  }
+
   .app_steps_title {
     margin-bottom: 0.2em;
   }
@@ -37,7 +43,6 @@ function App(props) {
       <header>
         <h1 className='app-title'>Welcome to Digital Libray</h1>
       </header>
-
       <section id='things' className='app_steps thingstodo'>
         <h2 className='app_steps_title'>Things to do:</h2>
         <Ul>

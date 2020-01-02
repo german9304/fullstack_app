@@ -13,7 +13,7 @@ const typeDefs = `
     books: [Book]!
     book(id: String!): Book
     author(id: String!): Author
-    me: Author!
+    me: Author
   }
 
   type Mutation {

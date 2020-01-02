@@ -27,7 +27,7 @@ function WithLayout(Page) {
         <title>Digital Library</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         <link
-          href='https://fonts.googleapis.com/css?family=Fredoka+One|Lakki+Reddy|Quattrocento&display=swap'
+          href='https://fonts.googleapis.com/css?family=Fredoka+One|Lakki+Reddy|Roboto|Quattrocento&display=swap'
           rel='stylesheet'
         />
       </Head>

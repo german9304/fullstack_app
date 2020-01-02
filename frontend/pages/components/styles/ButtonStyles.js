@@ -5,7 +5,7 @@ const ButtonStyles = styled.button`
   color: #ffffff;
   outline: none;
   cursor: pointer;
-  padding: 0.5em 0;
+  padding: 1em 0;
   font-family: var(--global-font);
   width: 100%;
   font-size: 1.2em;

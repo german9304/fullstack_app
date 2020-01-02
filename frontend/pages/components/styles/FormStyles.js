@@ -11,6 +11,7 @@ const FormStyles = styled.form`
   }
 
   input {
+    background: none;
     padding: 0.4em 0.4em;
     font-size: 1em;
     outline: none;

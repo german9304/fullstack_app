@@ -3,6 +3,8 @@ import WithLayout from './components/Layout';
 import FormStyles from './components/styles/FormStyles';
 import StyledButton from './components/styles/ButtonStyles';
 import gql from 'graphql-tag';
+import { ME_QUERY } from './components/Author';
+import { useRouter } from 'next/router';
 
 import { useMutation } from '@apollo/react-hooks';
 import { useState } from 'react';
@@ -21,15 +23,23 @@ export const SIGNIN_MUTATION = gql`
 `;
 
 function Signin() {
-  const [signinMutation, { data, error, loading }] = useMutation(
-    SIGNIN_MUTATION
-  );
+  const router = useRouter();
+  const [
+    signinMutation,
+    { data, error, loading }
+  ] = useMutation(SIGNIN_MUTATION, { refetchQueries: [{ query: ME_QUERY }] });
   const email = useInputValue('');
   const password = useInputValue('');
 
   if (loading) return <p>loading...</p>;
   if (error) {
     return <p>error</p>;
+  }
+
+  if (data) {
+    if (router) {
+      router.push('/feed');
+    }
   }
 
   function handleSubmit(e) {
