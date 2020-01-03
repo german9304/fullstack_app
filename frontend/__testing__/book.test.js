@@ -50,8 +50,6 @@ describe('book component', () => {
     await act(async () => {});
 
     const bookSections = container.querySelectorAll('.book');
-    const articleheader = container.querySelector('.article-header');
     expect(bookSections.length).toBe(2);
-    expect(articleheader.textContent).toBe('Books');
   });
 });

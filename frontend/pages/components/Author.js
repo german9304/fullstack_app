@@ -27,7 +27,7 @@ function useMe() {
   const { loading, error, data } = useQuery(ME_QUERY);
 
   if (error) {
-    console.log('there is an error');
+    console.log('there is an error', error);
   }
   return {
     data,
