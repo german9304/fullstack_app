@@ -7,7 +7,6 @@ import gql from 'graphql-tag';
 import FormStyles from './components/styles/FormStyles';
 import WithLayout from './components/Layout';
 import StyledButton from './components/styles/ButtonStyles';
-import Me from './components/Author';
 
 import { useMutation } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';

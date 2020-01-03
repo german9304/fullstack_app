@@ -40,7 +40,7 @@ describe('book component', () => {
         }
       }
     ];
-
+    await act(async () => {});
     const { container } = render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <Books />

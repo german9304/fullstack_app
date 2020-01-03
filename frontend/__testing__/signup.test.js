@@ -1,9 +1,10 @@
 import pretty from 'pretty';
 import Signup, { SIGNUP_MUTATION } from '../pages/Signup';
-
+import { ME_QUERY } from '../pages/components/Author';
 import { act } from 'react-dom/test-utils';
 import { render, fireEvent } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
+import { fakeUser } from './fakeUser';
 
 describe('Signup component', () => {
   test('should render withour crashing', async () => {
@@ -37,6 +38,16 @@ describe('Signup component', () => {
               }
             }
           };
+        }
+      },
+      {
+        request: {
+          query: ME_QUERY
+        },
+        result: {
+          data: {
+            me: fakeUser()
+          }
         }
       }
     ];
