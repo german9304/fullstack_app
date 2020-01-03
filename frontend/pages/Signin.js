@@ -15,28 +15,44 @@ export const SIGNIN_MUTATION = gql`
     signin(email: $email, password: $password) {
       author_id
       name
+      last_name
       email
       password
       created
+      age
+      books {
+        book_id
+        title
+        type
+        description
+        created
+      }
     }
   }
 `;
 
 function Signin() {
   const router = useRouter();
-  const [
-    signinMutation,
-    { data, error, loading }
-  ] = useMutation(SIGNIN_MUTATION, { refetchQueries: [{ query: ME_QUERY }] });
+  const [signinMutation, mutationData] = useMutation(SIGNIN_MUTATION, {
+    update(cache, data) {
+      const currentUser = cache.readQuery({ query: ME_QUERY });
+      cache.writeQuery({
+        query: ME_QUERY,
+        data: {
+          me: { ...currentUser.me, ...data.data.signin }
+        }
+      });
+    }
+  });
   const email = useInputValue('');
   const password = useInputValue('');
 
-  if (loading) return <p>loading...</p>;
-  if (error) {
+  if (mutationData.loading) return <p>loading...</p>;
+  if (mutationData.error) {
     return <p>error</p>;
   }
 
-  if (data) {
+  if (mutationData.data) {
     if (router) {
       router.push('/feed');
     }

@@ -7,7 +7,7 @@ const StyledLayout = styled.div`
   * {
     box-sizing: border-box;
   }
-
+  /* position: relative; */
   main {
     display: flex;
     flex-direction: column;
@@ -28,6 +28,10 @@ function WithLayout(Page) {
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         <link
           href='https://fonts.googleapis.com/css?family=Fredoka+One|Lakki+Reddy|Roboto|Quattrocento&display=swap'
+          rel='stylesheet'
+        />
+        <link
+          href='https://fonts.googleapis.com/icon?family=Material+Icons'
           rel='stylesheet'
         />
       </Head>
